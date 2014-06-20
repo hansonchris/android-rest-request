@@ -8,17 +8,18 @@ import android.content.Context;
 
 abstract public class WebServicePostAbstract extends WebServiceAbstract
 {
-	abstract protected String _getPostBody();
-	
-	public WebServicePostAbstract(Context context)
-	{
-		super(context);
-	}
+    abstract protected String _getPostBody();
 
-	protected HttpUriRequest _getHttpUriRequest(String uri)
-	{
-		HttpPost httpRequest = new HttpPost(uri);
-		httpRequest.setEntity(new ByteArrayEntity(_getPostBody().getBytes()));
-		return httpRequest;
-	}
+    public WebServicePostAbstract(Context context)
+    {
+        super(context);
+    }
+
+    protected HttpUriRequest getHttpUriRequest(String uri)
+    {
+        HttpPost httpRequest = new HttpPost(uri);
+        httpRequest.setEntity(new ByteArrayEntity(_getPostBody().getBytes()));
+
+        return httpRequest;
+    }
 }

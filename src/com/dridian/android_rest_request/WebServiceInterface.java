@@ -6,17 +6,17 @@ import android.app.PendingIntent;
 
 public interface WebServiceInterface
 {
-	public RestResponse doRequest();
-	
-	public String serializeValues();
-	
-	public void unserializeValues(String values);
-	
-	public PendingIntent getPendingIntentSuccess(RestResponse response);
-	
-	public PendingIntent getPendingIntentFailure();
-	
-	public boolean shouldAddPendingRequest(List<PendingWebService> pendingServices);
-	
-	public String getRequestUrl();
+    public void makeRequest(RequestAsyncTask requestAsyncTask);
+
+    public String serializeValues();
+
+    public void unserializeValues(String values);
+
+    public PendingIntent getPendingIntentSuccess(RestResponse response);
+
+    public PendingIntent getPendingIntentFailure();
+
+    public boolean shouldAddPendingRequest(List<PendingWebService> pendingServices);
+
+    public String getRequestUrl();
 }

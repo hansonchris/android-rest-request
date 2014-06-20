@@ -7,13 +7,13 @@ import android.content.Context;
 
 abstract public class WebServiceDeleteAbstract extends WebServiceAbstract
 {
-	public WebServiceDeleteAbstract(Context context)
-	{
-		super(context);
-	}
-	
-	protected HttpUriRequest _getHttpUriRequest(String uri)
-	{
-		return new HttpDelete(uri);
-	}
+    public WebServiceDeleteAbstract(Context context)
+    {
+        super(context);
+    }
+
+    protected HttpUriRequest getHttpUriRequest(String uri)
+    {
+        return new HttpDelete(uri);
+    }
 }
