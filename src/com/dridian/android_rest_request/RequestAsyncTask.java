@@ -14,14 +14,14 @@ public class RequestAsyncTask
 
     public void execute(final AsyncTaskRequestHandlerInterface requestHandler)
     {
-        new AsyncTask<Void, Void, RestResponse>()
+        new AsyncTask<Void, Void, RestResponseInterface>()
         {
-            protected RestResponse doInBackground(Void... voids)
+            protected RestResponseInterface doInBackground(Void... voids)
             {
                 return requestHandler.handleRequest();
             }
 
-            protected void onPostExecute(RestResponse response)
+            protected void onPostExecute(RestResponseInterface response)
             {
                 responseHandler.handleResponse(response);
             }
