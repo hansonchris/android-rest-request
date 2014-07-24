@@ -8,7 +8,7 @@ import android.content.Context;
 
 abstract public class WebServicePostAbstract extends WebServiceAbstract
 {
-    abstract protected String _getPostBody();
+    abstract protected String getPostBody();
 
     public WebServicePostAbstract(Context context)
     {
@@ -18,7 +18,7 @@ abstract public class WebServicePostAbstract extends WebServiceAbstract
     protected HttpUriRequest getHttpUriRequest(String uri)
     {
         HttpPost httpRequest = new HttpPost(uri);
-        httpRequest.setEntity(new ByteArrayEntity(_getPostBody().getBytes()));
+        httpRequest.setEntity(new ByteArrayEntity(getPostBody().getBytes()));
 
         return httpRequest;
     }

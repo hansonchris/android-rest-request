@@ -4,18 +4,11 @@ import android.os.AsyncTask;
 
 public class RequestAsyncTask
 {
-    protected AsyncTaskRequestHandlerInterface requestHandler;
-    protected AsyncTaskResponseHandlerInterface responseHandler;
-
-    public RequestAsyncTask(AsyncTaskResponseHandlerInterface responseHandler)
-    {
-        this.responseHandler = responseHandler;
-    }
-
-    public void execute(final AsyncTaskRequestHandlerInterface requestHandler)
-    {
-        new AsyncTask<Void, Void, RestResponseInterface>()
-        {
+    public void execute(
+        final AsyncTaskRequestHandlerInterface requestHandler,
+        final AsyncTaskResponseHandlerInterface responseHandler
+    ) {
+        new AsyncTask<Void, Void, RestResponseInterface>() {
             protected RestResponseInterface doInBackground(Void... voids)
             {
                 return requestHandler.handleRequest();

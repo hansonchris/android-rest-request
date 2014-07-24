@@ -6,18 +6,18 @@ public class CachedWebServiceResponse implements RestResponseInterface
 {
     protected String responseBody;
     protected long expirationTime;
-    
+
     public CachedWebServiceResponse(String responseBody, long expirationTime)
     {
         this.responseBody = responseBody;
         this.expirationTime = expirationTime;
     }
-    
+
     public String getResponseBody()
     {
         return responseBody;
     }
-    
+
     public boolean isExpired()
     {
         long now = Calendar.getInstance().getTimeInMillis();

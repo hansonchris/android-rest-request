@@ -17,6 +17,16 @@ public class RestResponse implements RestResponseInterface
         responseBody = getResponseBodyFromResponse(httpResponse);
     }
 
+    public int getStatusCode()
+    {
+        return statusCode;
+    }
+
+    public String getResponseBody()
+    {
+        return responseBody;
+    }
+
     protected int getStatusCodeFromResponse(HttpResponse httpResponse)
     {
         return httpResponse.getStatusLine().getStatusCode();
@@ -27,29 +37,16 @@ public class RestResponse implements RestResponseInterface
         StringBuilder stringBuilder = getStringBuilder();
         HttpEntity entity = httpResponse.getEntity();
         InputStream stream;
-        try
-        {
+        try {
             stream = entity.getContent();
             int b;
-            while ((b = stream.read()) != -1)
-            {
+            while ((b = stream.read()) != -1) {
                 stringBuilder.append((char) b);
             }
-        }
-        catch (IllegalStateException e) {}
+        } catch (IllegalStateException e) {}
         catch (IOException e) {}
         responseBody = stringBuilder.toString();
 
-        return responseBody;
-    }
-
-    public int getStatusCode()
-    {
-        return statusCode;
-    }
-
-    public String getResponseBody()
-    {
         return responseBody;
     }
 

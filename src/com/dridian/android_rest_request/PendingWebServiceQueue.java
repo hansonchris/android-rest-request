@@ -1,65 +1,69 @@
 package com.dridian.android_rest_request;
 
-import java.util.List;
-import java.util.Vector;
+import android.content.Context;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class PendingWebServiceQueue
 {
-    protected List<PendingWebService> pendingServices;
-    volatile protected PendingWebServicePersistentStorageInterface storage;
+    protected Map<String, PendingWebService> pendingWebServices;
+    protected PendingWebServicePersistentStorageWrapper storage;
 
-    public PendingWebServiceQueue(PendingWebServicePersistentStorageInterface storage)
+    public PendingWebServiceQueue(Context context)
     {
-        this.storage = storage;
+        initStorage(context);
         populatePendingServices();
     }
 
-    public void addPendingService(PendingWebService pendingService)
+    public void addPendingService(PendingWebService pendingWebService)
     {
-        long id = storage.savePendingWebService(pendingService);
-        pendingService.setId(id);
-        pendingServices = storage.getPendingWebServices();
+        storage.savePendingWebService(pendingWebService);
+        pendingWebServices = storage.getPendingWebServices();
     }
 
-    public void removePendingService(PendingWebService pendingService)
+    public void removePendingService(PendingWebService pendingWebService)
     {
-        if (pendingServices.contains(pendingService))
-        {
-            pendingServices.remove(pendingService);
+        if (pendingWebServices.containsValue(pendingWebService)) {
+            pendingWebServices.remove(pendingWebService);
         }
-        storage.removePendingWebService(pendingService);
+        storage.removePendingWebService(pendingWebService);
     }
 
     public void removeAllInstances(WebServiceInterface webService)
     {
-        if (pendingServices != null)
-        {
-            for (PendingWebService currentPendingService : pendingServices)
-            {
-                if (currentPendingService.getWebService().getClass().equals(webService.getClass()))
-                {
+        if (pendingWebServices != null) {
+            Set<String> ids = pendingWebServices.keySet();
+            for (String id : ids) {
+                PendingWebService currentPendingService = pendingWebServices.get(id);
+                if (currentPendingService.getWebService().getClass().equals(webService.getClass())) {
                     removePendingService(currentPendingService);
                 }
             }
         }
     }
 
+    public Map<String, PendingWebService> getPendingServices()
+    {
+        return pendingWebServices;
+    }
+
+    protected void initStorage(Context context)
+    {
+        storage = new PendingWebServicePersistentStorageWrapper(context);
+    }
+
     protected void populatePendingServices()
     {
-        pendingServices = storage.getPendingWebServices();
-        if (pendingServices == null)
-        {
-            pendingServices = getListPendingWebService();
+        pendingWebServices = storage.getPendingWebServices();
+        if (pendingWebServices == null) {
+            pendingWebServices = getPendingWebService();
         }
     }
 
-    public List<PendingWebService> getPendingServices()
+    protected Map<String, PendingWebService> getPendingWebService()
     {
-        return pendingServices;
-    }
-
-    protected List<PendingWebService> getListPendingWebService()
-    {
-        return new Vector<PendingWebService>();
+        return new HashMap<String, PendingWebService>();
     }
 }

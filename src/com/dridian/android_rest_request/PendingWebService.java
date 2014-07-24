@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class PendingWebService
 {
-    protected long id;
+    protected String id;
     protected WebServiceInterface service;
     protected Calendar lastRan;
     protected int frequency;
@@ -16,12 +16,6 @@ public class PendingWebService
         this.frequency = frequency;
         this.frequencyUnit = frequencyUnit;
         lastRan = Calendar.getInstance();
-    }
-
-    public PendingWebService(long id, WebServiceInterface service, int frequency, int frequencyUnit)
-    {
-        this(service, frequency, frequencyUnit);
-        setId(id);
     }
 
     public void updateRunTime()
@@ -42,16 +36,6 @@ public class PendingWebService
     public WebServiceInterface getWebService()
     {
         return service;
-    }
-
-    public void setId(long id)
-    {
-        this.id = id;
-    }
-
-    public long getId()
-    {
-        return id;
     }
 
     public int getFrequency()
