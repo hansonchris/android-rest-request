@@ -27,10 +27,6 @@ abstract public class WebServiceAbstract implements WebServiceInterface
 
     abstract protected boolean canMakeRequest();
 
-    abstract protected String getAuthKeyName();
-
-    abstract protected String getAuthKey();
-
     public WebServiceAbstract(Context context)
     {
         this.context = context;
@@ -176,5 +172,21 @@ abstract public class WebServiceAbstract implements WebServiceInterface
         } catch (NoSuchAlgorithmException e) {}
 
         return null;
+    }
+
+    /**
+     * Override to send authorization header
+     */
+    protected String getAuthKeyName()
+    {
+        return "";
+    }
+
+    /**
+     * Override to send authorization header
+     */
+    protected String getAuthKey()
+    {
+        return "";
     }
 }
