@@ -1,5 +1,6 @@
 package com.dridian.android_rest_request;
 
+import android.app.PendingIntent;
 import android.content.Context;
 
 import org.apache.http.HttpResponse;
@@ -164,6 +165,22 @@ abstract public class WebServiceAbstract implements WebServiceInterface
     public void unserializeValues(String values)
     {
 
+    }
+
+    /**
+     * Overridden by subclasses that need to queue failed requests
+     */
+    public PendingIntent getPendingIntentSuccess(RestResponseInterface response)
+    {
+        return null;
+    }
+
+    /**
+     * Overridden by subclasses that need to queue failed requests
+     */
+    public PendingIntent getPendingIntentFailure()
+    {
+        return null;
     }
 
     /**
