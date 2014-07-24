@@ -151,6 +151,22 @@ abstract public class WebServiceAbstract implements WebServiceInterface
     }
 
     /**
+     * Overridden by subclasses that need to queue failed requests
+     */
+    public String serializeValues()
+    {
+        return null;
+    }
+
+    /**
+     * Overridden by subclasses that need to queue failed requests
+     */
+    public void unserializeValues(String values)
+    {
+
+    }
+
+    /**
      * Should be overridden in most cases if a service will be queued upon failure.
      */
     public String getId()
