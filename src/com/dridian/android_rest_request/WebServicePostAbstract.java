@@ -15,9 +15,9 @@ abstract public class WebServicePostAbstract extends WebServiceAbstract
         super(context);
     }
 
-    protected HttpUriRequest getHttpUriRequest(String uri)
+    protected HttpUriRequest getHttpUriRequest()
     {
-        HttpPost httpRequest = new HttpPost(uri);
+        HttpPost httpRequest = new HttpPost(getUrl());
         httpRequest.setEntity(new ByteArrayEntity(getPostBody().getBytes()));
 
         return httpRequest;

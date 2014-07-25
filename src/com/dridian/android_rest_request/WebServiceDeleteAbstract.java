@@ -12,8 +12,8 @@ abstract public class WebServiceDeleteAbstract extends WebServiceAbstract
         super(context);
     }
 
-    protected HttpUriRequest getHttpUriRequest(String uri)
+    protected HttpUriRequest getHttpUriRequest()
     {
-        return new HttpDelete(uri);
+        return new HttpDelete(getUrl());
     }
 }

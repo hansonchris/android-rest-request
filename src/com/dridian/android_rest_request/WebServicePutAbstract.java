@@ -15,9 +15,9 @@ abstract public class WebServicePutAbstract extends WebServiceAbstract
         super(context);
     }
 
-    protected HttpUriRequest getHttpUriRequest(String uri)
+    protected HttpUriRequest getHttpUriRequest()
     {
-        HttpPut httpRequest = new HttpPut(uri);
+        HttpPut httpRequest = new HttpPut(getUrl());
         httpRequest.setEntity(new ByteArrayEntity(getPutBody().getBytes()));
 
         return httpRequest;
